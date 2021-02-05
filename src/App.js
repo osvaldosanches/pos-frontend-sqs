@@ -12,7 +12,7 @@ function App() {
   const [novaDescricao, setNovaDescricao] = useState("");
 
   useEffect(()=>{
-    Axios.get("http://localhost:3001/api/get").then((response) => {
+    Axios.get("https://pos-backend-sqs-2021.herokuapp.com/api/get").then((response) => {
 
       setNormaList(response.data);
       //alert(response);
@@ -25,7 +25,7 @@ function App() {
   const enviar = () =>{
 
 
-    Axios.post("http://localhost:3001/api/insert",{
+    Axios.post("https://pos-backend-sqs-2021.herokuapp.com/api/insert",{
       nome:nome, 
       descricao:descricao,
     });
