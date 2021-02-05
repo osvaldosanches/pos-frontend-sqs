@@ -13,10 +13,11 @@ function App() {
 
   useEffect(()=>{
     Axios.get("http://localhost:3001/api/get").then((response) => {
-      console.log("osvaldo");
-      console.log(response.data);
+
       setNormaList(response.data);
-      alert(response.data);
+      //alert(response);
+      //alert(response.data);
+      //alert(response.data.ReceiveMessageResponse.ReceiveMessageResult.messages[0].Body);
 
     });
   },[]);
@@ -36,58 +37,30 @@ function App() {
 
   };
 
-  const deleteBotao = (nome) =>{
-
-    Axios.delete('http://localhost:3001/api/delete/'.concat(nome));
-
-  };
-
-  const updateBotao = (nome) =>{
-
-    Axios.put("http://localhost:3001/api/update",{
-      nome:nome, 
-      descricao:novaDescricao,
-    });
-    setNovaDescricao ("")
-
-  };
-
-  const teste = (dados) =>{
-
-    //alert(dados);
-    //setNormaList(dados);
-
-  };
-
   return (
     <div className="App">
 
-      <h1>GESTÃO DE NORMAS</h1>
+      <h1>SOLICITAÇÃO DE RELATÓRIO</h1>
+      < br />
 
       <div className = "form"> 
-        <label>Norma:</label>
+        <label>Nome do relatório:</label>
         <input type="text" name="nome" onChange={(e)=>{
           setNome(e.target.value);  
         }}/>
-        <label>Descrição:</label>
+        <label>Observação:</label>
         <input type="text" name="descricao" onChange={(e)=>{
           setDescricao(e.target.value);  
         }}/>
         <button onClick={enviar}>Enviar</button>
+        < br /> 
 
         {normaList.map((val) => {
           return (
+           
            <div className="card"> 
                     <h1>{val.nome} </h1>
                     <p>{val.descricao}</p> 
-
-                    <button onClick={() =>{deleteBotao(val.nome)}}>Delete</button>
-
-                    <input type="text" id="updateInput" onChange={(e) => {
-                        setNovaDescricao(e.target.value)
-                    }} />
-
-                    <button onClick={() =>{updateBotao(val.nome)}}>Update</button>
             </div>
          );
         })}
